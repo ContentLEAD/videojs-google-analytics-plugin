@@ -1,0 +1,9 @@
+{
+  "name": "videojs-plugin-components",
+  "version": "0.1.0",
+  "dependencies": {
+    "jquery": "1.10.1",
+    "dustjs-linkedin": "~2.0.2",
+    "videojs-plugin-components": "git://github.com/Axonn/videojs-plugin-components"
+  }
+}
