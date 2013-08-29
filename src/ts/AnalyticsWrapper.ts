@@ -9,8 +9,8 @@ module GoogleAnalytics {
             return [];
         }
 
-        pop(): any { return "" };
-        push(val): number { return 0; };
+        pop(): any { return "" }
+        push(val): number { return 0; }
     }
 
     export class AnalyticsWrapper extends XArray {
@@ -18,6 +18,6 @@ module GoogleAnalytics {
         push(val): number {
             _gaq.push(val);
             return super.push(val);
-        };
+        }
     }
 }

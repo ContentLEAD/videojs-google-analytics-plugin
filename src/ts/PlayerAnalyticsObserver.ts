@@ -1,9 +1,7 @@
 ///<reference path='IPlayerAnalyticsObserver.ts'/>
 ///<reference path='ILoadingTimeObserver.ts'/>
-///<reference path='../../../definitions/JQuery.d.ts'/> 
-///<reference path='../vjsplugin/IPlayer.ts'/>
-///<reference path='../vjsplugin/IObservableRepository.ts'/>
-///<reference path='../vjsplugin/ISinglePointEvent.ts'/>
+///<reference path='../definitions/JQuery.d.ts'/> 
+///<reference path='../../bower_components/videojs-plugin-components/vjsplugincomponents.d.ts'/>
 
 module GoogleAnalytics {
     export class PlayerAnalyticsObserver implements IPlayerAnalyticsObserver {
@@ -14,14 +12,14 @@ module GoogleAnalytics {
         _watchTriggerIndex: number;
         _title: string;
         _analytics: any[];
-        _player: VjsPlugin.IPlayer;
-        _seeked: bool = false;
-        _seeking: bool = false;
+        _player: VjsPluginComponents.IPlayer;
+        _seeked: boolean = false;
+        _seeking: boolean = false;
         _loadingTimer: ILoadingTimeObserver;
-        _singlePointEventRepository: VjsPlugin.IObservableRepository;
+        _singlePointEventRepository: VjsPluginComponents.IObservableRepository;
         static name: string = "playerAnalyticsObserver";
 
-        constructor(player: VjsPlugin.IPlayer, analytics, loadingTimer: ILoadingTimeObserver, singlePointEventRepository: VjsPlugin.IObservableRepository) {
+        constructor(player: VjsPluginComponents.IPlayer, analytics, loadingTimer: ILoadingTimeObserver, singlePointEventRepository: VjsPluginComponents.IObservableRepository) {
             
             try {
                 this._eventHasFired = { Play: false };
@@ -84,7 +82,7 @@ module GoogleAnalytics {
             while (pointsToTrigger.length > 0 && pointsToTrigger[0]< this._player.duration()) {
                 var time = pointsToTrigger.shift();
 
-                var singlePointEvent: VjsPlugin.ISinglePointEvent = {
+                var singlePointEvent: VjsPluginComponents.ISinglePointEvent = {
                     time: time,
                     handler: buildTimeWatchedEventHandler(time),
                     maxCallCount: 1
@@ -93,7 +91,7 @@ module GoogleAnalytics {
                 this._singlePointEventRepository.create(singlePointEvent);
             }
 
-            var singlePointEvent: VjsPlugin.ISinglePointEvent = {
+            var singlePointEvent: VjsPluginComponents.ISinglePointEvent = {
                 time: this._player.duration(),
                 handler: () => { this.reportEndOfVideoEvent() },
                 maxCallCount: 1

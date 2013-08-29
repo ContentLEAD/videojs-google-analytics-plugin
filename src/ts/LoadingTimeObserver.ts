@@ -1,16 +1,14 @@
 ///<reference path='ILoadingTimeObserver.ts'/>
-///<reference path='../common/ITimer.ts'/>
-///<reference path='../common/Timer.ts'/>
-///<reference path='../common/DateService.ts'/>
-///<reference path='../../../definitions/JQuery.d.ts'/>
+///<reference path='../definitions/JQuery.d.ts'/>
+///<reference path='../../bower_components/videojs-plugin-components/vjsplugincomponents.d.ts'/>
 
 module GoogleAnalytics {
     export class LoadingTimeObserver {
         _player;
-        _timer: Common.ITimer;
+        _timer: VjsPluginComponents.ITimer;
         static name: string = "loadingTimeObserver";
 
-        constructor(player, timer: Common.ITimer) {
+        constructor(player, timer: VjsPluginComponents.ITimer) {
             this._timer = timer;
             player.on("canplay", this._timer.stop);
             player.on("canplaythrough", this._timer.stop);

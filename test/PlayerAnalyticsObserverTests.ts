@@ -1,9 +1,7 @@
-/// <reference path="../../../definitions/Jasmine.d.ts" />
-/// <reference path="../../../definitions/JQuery.d.ts" />
-/// <reference path="../../../definitions/Require.d.ts" />
+/// <reference path="../src/definitions/Jasmine.d.ts" />
+/// <reference path="../src/definitions/JQuery.d.ts" />
 /// <chutzpah_reference path="../../../lib/JQuery/jquery-1.9.1.js" />
-/// <reference path="../../../local/plugins/googleanalytics/PlayerAnalyticsObserver.ts" />
-/// <reference path="../../../local/plugins/vjsplugin/IObservableRepository.ts" />
+/// <reference path="../src/ts/PlayerAnalyticsObserver.ts" />
 
 describe("player analytics observer", function () {
     var curriedGetFunctionFromSpy = (spy: jasmine.Spy) => {
@@ -16,7 +14,7 @@ describe("player analytics observer", function () {
         };
     }
 
-    var player: VjsPlugin.IPlayer;
+    var player: VjsPluginComponents.IPlayer;
     var triggerEventSpy;
     var playerEventSpy;
     var getVideoSpy;
@@ -26,7 +24,7 @@ describe("player analytics observer", function () {
     var idSpy;
     var playerId;
     var videoId;
-    var eventRepository: VjsPlugin.IObservableRepository;
+    var eventRepository: VjsPluginComponents.IObservableRepository;
     var createEventSpy;
 
     beforeEach(() => {
@@ -87,7 +85,7 @@ describe("player analytics observer", function () {
     });
 
     it("recognises play event (using spies)", function () {
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("play")();
 
@@ -95,7 +93,7 @@ describe("player analytics observer", function () {
     });
 
     it("recognises pause event", function () {
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("pause")();
 
@@ -103,7 +101,7 @@ describe("player analytics observer", function () {
     });
 
     it("recognises error event", function () {
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("error")();
 
@@ -111,7 +109,7 @@ describe("player analytics observer", function () {
     });
 
     it("recognises share event", function () {
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("share")({ args: { share: "google+" } });
 
@@ -126,7 +124,7 @@ describe("player analytics observer", function () {
             })
         })
 
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("changeresolution")();
 
@@ -134,7 +132,7 @@ describe("player analytics observer", function () {
     });
 
     it("recognises generic action event", function () {
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("action")({ args: { name: "Conversion_goal_hit" } });
 
@@ -144,7 +142,7 @@ describe("player analytics observer", function () {
     it("recognises 60 seconds video watched events", function () {
         durationSpy.andReturn(120);
 
-        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { } }, eventRepository);
+        var observer = new GoogleAnalytics.PlayerAnalyticsObserver(player, analytics, { getTime: () => { return 0; } }, eventRepository);
 
         curriedGetFunctionFromSpy(playerEventSpy)("durationset")();
 

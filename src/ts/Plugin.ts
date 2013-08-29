@@ -3,59 +3,47 @@
 ///<reference path='PlayerAnalyticsObserver.ts'/>
 ///<reference path='LoadingTimeObserver.ts'/>
 ///<reference path='AnalyticsWrapper.ts'/>
-///<reference path='../../../definitions/JQuery.d.ts'/>
-///<reference path='../common/Timer.ts'/>
-///<reference path='../common/DateService.ts'/>
-///<reference path='../vjsplugin/Player.ts'/>
-///<reference path='../vjsplugin/SinglePointEventRepository.ts'/>
-///<reference path='../vjsplugin/ApplySingleService.ts'/>
-///<reference path='../vjsplugin/Observable.ts'/>
-///<reference path='../vjsplugin/ObservableSubRepository.ts'/>
-///<reference path='../vjsplugin/ObservableRepository.ts'/>
-///<reference path='../vjsplugin/WalkableList.ts'/>
-///<reference path='../vjsplugin/EventSortingFunction.ts'/>
-///<reference path='../vjsplugin/PlayObserver.ts'/>
-///<reference path='../vjsplugin/TimeBasedEventRepository.ts'/>
-///<reference path='../vjsplugin/DurationSetEmitter.ts'/>
+///<reference path='../definitions/JQuery.d.ts'/>
+///<reference path='../../bower_components/videojs-plugin-components/vjsplugincomponents.d.ts'/>
 
 module GoogleAnalytics {
     export class Plugin {
-        _player: VjsPlugin.IPlayer;
+        _player: VjsPluginComponents.IPlayer;
 
         constructor(player) {
-            this._player = new VjsPlugin.Player(player);
+            this._player = new VjsPluginComponents.Player(player);
         }
 
         enable() {
-            var applyServiceToPlayer = VjsPlugin.ApplySingleService(this._player);
+            var applyServiceToPlayer = VjsPluginComponents.ApplySingleService(this._player);
 
             var durationEmitter = applyServiceToPlayer("DurationSetEmitter")(() => {
-                return new VjsPlugin.DurationSetEmitter(this._player);
+                return new VjsPluginComponents.DurationSetEmitter(this._player);
             });
 
             var singlePointEventRepository = applyServiceToPlayer("SinglePointEventRepository")(() => {
-                return new VjsPlugin.SinglePointEventRepository(new VjsPlugin.ObservableRepository(new VjsPlugin.Observable()));
+                return new VjsPluginComponents.SinglePointEventRepository(new VjsPluginComponents.ObservableRepository(new VjsPluginComponents.Observable()));
             });
 
             var timeBasedEventRepository = applyServiceToPlayer("TimeBasedEventRepository")(() => {
-                return new VjsPlugin.TimeBasedEventRepository(new VjsPlugin.ObservableRepository(new VjsPlugin.Observable()), singlePointEventRepository);
+                return new VjsPluginComponents.TimeBasedEventRepository(new VjsPluginComponents.ObservableRepository(new VjsPluginComponents.Observable()), singlePointEventRepository);
             });
 
             var eventManager = applyServiceToPlayer("TimeBasedEventManager")(() => {
-                var singlePointEventList = new VjsPlugin.WalkableList(VjsPlugin.EventSortingFunction,
+                var singlePointEventList = new VjsPluginComponents.WalkableList(VjsPluginComponents.EventSortingFunction,
                     (a) => {
                         return (typeof a.maxCallCount === "undefined") || a.maxCallCount > a.callCount
                     },
                     singlePointEventRepository
                 );
 
-                return new VjsPlugin.TimeBasedEventManager(new VjsPlugin.PlayObserver(this._player), singlePointEventList, timeBasedEventRepository)
+                return new VjsPluginComponents.TimeBasedEventManager(new VjsPluginComponents.PlayObserver(this._player), singlePointEventList, timeBasedEventRepository)
             });
 
-            var singlePointEventSubRepository = new VjsPlugin.ObservableSubRepository(singlePointEventRepository, new VjsPlugin.Observable());
+            var singlePointEventSubRepository = new VjsPluginComponents.ObservableSubRepository(singlePointEventRepository, new VjsPluginComponents.Observable());
 
             var loadingObserver = applyServiceToPlayer("LoadingTimeObserver")(() => {
-                return new LoadingTimeObserver(this._player, new Common.Timer(window, new Common.DateService()));
+                return new LoadingTimeObserver(this._player, new VjsPluginComponents.Timer(window, new VjsPluginComponents.DateService()));
             });
 
             var playerAnalyticsObserver = applyServiceToPlayer("PlayerAnalyticsObserver")(() => {
