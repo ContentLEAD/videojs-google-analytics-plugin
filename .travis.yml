@@ -5,17 +5,16 @@ before_script:
 - bower install
 env:
   global:
-  - secure: EyQ+4g03UKWmWZCjWsVpsj1FgYI8YN2ocRBzAwAkgPhN0BAx8BrOvlbKVyHWN/jArNmP/RyTXDeNEb5H/nszgiwptV1K4R3Cvl2Rwy73OUiYMlI5P3BbCdiDcJXwl7YakmO3g+5UEaRjVcXaLq3/awc9h5gdgRA5CrS/CVO/LeM=
+  - secure: HeIQSr2Afs7EiJcnCWL4xweytV9xQOCekz+zaHi0sQj+XrJChcFpwDwouWdVTQD2HwX7QUa3DbyPvjZwnBqz3mLsvNcJHnqkV6CzUC96mtPoGU2Sa5hb1vUgaKBtYmPuq8Xu5Bqiq/KLG1n7DlLaYYQUZ8GodPmcZqY/q0DfoUM=
   - GH_OWNER: Axonn
   - GH_PROJECT_NAME: videojs-google-analytics-plugin
 after_success:
 - if git checkout master; then git checkout -b master; fi
 - cp build/js/vjsgoogleanalytics.js vjsgoogleanalytics.js
-- cp build/js/vjsgoogleanalytics.d.ts vjsgoogleanalytics.d.ts 
+- cp build/js/vjsgoogleanalytics.d.ts vjsgoogleanalytics.d.ts
 - git add -f vjsgoogleanalytics.js
-- git add -f vjsgoogleanalytics.d.ts 
+- git add -f vjsgoogleanalytics.d.ts
 - git config user.name "travis-ci"
 - git config user.email "corwin.tomkinson@adfero.co.uk"
 - git commit -am "add build files to master [ci skip]"
 - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master > /dev/null 2>&1
-  
