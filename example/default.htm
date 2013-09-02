@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" href="../bower_components/video.js/video-js.css" type="text/css" />
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-XXXXXXX-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+		
+    </script>
+		<script src="../bower_components/video.js/video.js" type="text/javascript"></script>
+		<script src="../bower_components/videojs-plugin-components/vjsplugincomponents.js" type="text/javascript"></script>
+	    <script src="../bower_components/jquery/jquery.js" type="text/javascript"></script>
+        <script src="../vjsgoogleanalytics.js" type="text/javascript"></script>
+
+	
+	</head>
+<body>
+    <h1>VideoJS w/ Google Analytics</h1>
+
+    <video id="vid1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264"
+        poster="http://video-js.zencoder.com/oceans-clip.png">
+        <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' data-resolution="240p">		
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type="video/mp4" data-resolution="240p">
+        <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' data-resolution="480p">
+
+        <source src="http://people.mozilla.com/~cpearce/Patent_Absurdity_LQ_350kbit.ogv" type='video/ogg' data-resolution="480p">
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' data-resolution="240p">
+        <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' data-resolution="480p">
+    </video>
+	<button id="video1">Video 1</button>
+	<button id="video2">Video 2</button>
+    <div id="content">
+	        <script type="text/javascript">
+            var video1 = _V_("vid1",
+                {
+                'plugins': {
+                    'googleAnalyticsPlugin': {
+                    }
+                }
+                });
+				jQuery(document).ready(function(){				
+					jQuery("#video1").click(function(){
+						var player = new VjsPluginComponents.Player(video1);
+						var video = new VjsPluginComponents.Video([{
+							resolution: "240", 
+							type: "video/ogg", 
+							src:"http://people.mozilla.com/~cpearce/Patent_Absurdity_LQ_350kbit.ogv"
+						},{
+							resolution: "480", 
+							type: "video/ogg", 
+							src:"http://people.mozilla.com/~cpearce/Patent_Absurdity_LQ_350kbit.ogv"
+						}], function(src){ return player.src(src)});
+						video.overlays = [{
+									template: {
+										name: "test"
+										},
+									model: {
+										class: "testTop",
+										name: "Bowser Rawr!!!!"
+									},
+									displayTimes: [{
+										type: "switch",
+										start: function () { return 0 },
+										end: function () { return 15.1 }
+									}]
+								}];
+						player.setVideo(video);
+					});
+					
+					jQuery("#video2").click(function(){
+						var player = new VjsPluginComponents.Player(video1);
+						var video = new VjsPluginComponents.Video([{
+							resolution: "240", 
+							type: "video/ogg", 
+							src:"http://people.mozilla.com/~cpearce/Patent_Absurdity_LQ_350kbit.ogv"
+						},{
+							resolution: "480", 
+							type: "video/ogg", 
+							src:"http://people.mozilla.com/~cpearce/Patent_Absurdity_LQ_350kbit.ogv"
+						}], function(src){ return player.src(src)});
+						video.overlays = [{
+									template: {
+										name: "test"
+										},
+									model: {
+										class: "testTop",
+										name: "The WINRAR is YOU!!!!!!!!!!"
+									},
+									displayTimes: [{
+										type: "switch",
+										start: function () { return 20 },
+										end: function () { return 300.0 }
+									}]
+								}];
+						player.setVideo(video);
+					})
+				});;
+    </script>
+	</div>
+
+<script type="text/javascript">  (function () { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/plusone.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();</script></body></html>
+
+
+
+
+
+</body>
+</html>
