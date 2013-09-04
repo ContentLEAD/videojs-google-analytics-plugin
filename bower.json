@@ -4,7 +4,7 @@
   "dependencies": {
     "jquery": "1.10.1",
     "dustjs-linkedin": "~2.0.2",
-    "videojs-plugin-components": "git://github.com/Axonn/videojs-plugin-components",
+    "videojs-plugin-components": "git://github.com/Axonn/videojs-plugin-components#~0.1.1",
     "video.js": "~4.1.0"
   }
 }
