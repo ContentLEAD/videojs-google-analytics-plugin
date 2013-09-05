@@ -71,6 +71,7 @@ describe("player analytics observer", function () {
             hide: jasmine.createSpy("player.hide"),
             width: jasmine.createSpy("player.width"),
             height: jasmine.createSpy("player.height"),
+			pause: jasmine.createSpy("player.pause"),
             dimensions: jasmine.createSpy("player.dimensions"),
             techName: jasmine.createSpy("player.techName"),
             play: jasmine.createSpy("player.play"),
