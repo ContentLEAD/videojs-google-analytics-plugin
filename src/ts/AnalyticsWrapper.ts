@@ -16,7 +16,9 @@ module GoogleAnalytics {
     export class AnalyticsWrapper extends XArray {
         
         push(val): number {
-            _gaq.push(val);
+            if (window["_gaq"]) {
+                _gaq.push(val);
+            }
             return super.push(val);
         }
     }
