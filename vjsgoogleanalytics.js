@@ -27,7 +27,9 @@ var GoogleAnalytics;
             _super.apply(this, arguments);
         }
         AnalyticsWrapper.prototype.push = function (val) {
-            _gaq.push(val);
+            if (window["_gaq"]) {
+                _gaq.push(val);
+            }
             return _super.prototype.push.call(this, val);
         };
         return AnalyticsWrapper;
