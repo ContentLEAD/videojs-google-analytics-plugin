@@ -5,7 +5,7 @@ before_script:
 - bower install
 env:
   global:
-  - secure: HeIQSr2Afs7EiJcnCWL4xweytV9xQOCekz+zaHi0sQj+XrJChcFpwDwouWdVTQD2HwX7QUa3DbyPvjZwnBqz3mLsvNcJHnqkV6CzUC96mtPoGU2Sa5hb1vUgaKBtYmPuq8Xu5Bqiq/KLG1n7DlLaYYQUZ8GodPmcZqY/q0DfoUM=
+  - secure: KQU/cbFzhCKKXxueP3t4EYnxDW1JgiG6KCjIUhaLpFEG4z5RFu4hFUbrvQ/QZljAVSlFuh0/PMNym2SOUTd6zr3gfh7yXL1cveqCk8uH11sjZotK1sBC23/nw0A5KpcwZmPGV8zgKtbHT3IdzNWQOgQw2E7FekWrZdA/IJjaZvY=
   - GH_OWNER: Axonn
   - GH_PROJECT_NAME: videojs-google-analytics-plugin
 after_success:
@@ -18,3 +18,4 @@ after_success:
 - git config user.email "corwin.tomkinson@adfero.co.uk"
 - git commit -am "add build files to master [ci skip]"
 - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:master > /dev/null 2>&1
+  
