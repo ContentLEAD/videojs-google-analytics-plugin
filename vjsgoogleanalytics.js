@@ -155,12 +155,18 @@ var GoogleAnalytics;
         PlayerAnalyticsObserver.prototype.reportEvent = function (action) {
             var id = this._player.getVideo().id;
             this._analytics.push(['_trackEvent', this._category, id + "_" + action, this._title]);
+            if(typeof ga !== 'undefined'){
+                ga('send', 'event', this._category, id + "_" + action, this._title);
+            }
         };
 
         PlayerAnalyticsObserver.prototype.reportSingleEvent = function (action) {
             if (!this._eventHasFired[action]) {
                 var id = this._player.getVideo().id;
                 this._analytics.push(['_trackEvent', this._category, id + "_" + action, this._title]);
+                if(typeof ga !== 'undefined'){
+                    ga('send', 'event', this._category, id + "_" + action, this._title);
+                }
                 this._eventHasFired[action] = true;
             }
         };
@@ -180,11 +186,17 @@ var GoogleAnalytics;
         PlayerAnalyticsObserver.prototype.reportQualityChangeEvent = function () {
             var id = this._player.getVideo().id;
             this._analytics.push(['_trackEvent', this._category, id + "_" + "QualityChange_" + this._player.getVideo().getPlayingSource().resolution, this._title]);
+            if(typeof ga !== 'undefined'){
+                ga('send', 'event', this._category, id + "_" + "QualityChange_" + this._player.getVideo().getPlayingSource().resolution, this._title);
+            }
         };
 
         PlayerAnalyticsObserver.prototype.reportTimeWatchedEvent = function (time) {
             var id = this._player.getVideo().id;
             this._analytics.push(['_trackEvent', this._category, id + "_" + "VideoWatched_" + time.toString(), this._title]);
+            if(typeof ga !== 'undefined'){
+                ga('send', 'event', this._category, id + "_" + "VideoWatched_" + time.toString(), this._title);
+            }
             this._triggeredPoints.push(time);
         };
 
